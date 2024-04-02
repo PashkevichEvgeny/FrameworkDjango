@@ -131,6 +131,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
+           'format': '%(levelname)s %(message)s',
+        },
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process} {thread} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
@@ -138,6 +147,7 @@ LOGGING = {
         'file': {
             'class': 'logging.FileHandler',
             'filename': './log/django.log',  # создать в корне django папку для логов - 'path/to/django/log'
+            'formatter': 'verbose',
         },
     },
     'loggers': {
@@ -155,6 +165,12 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+        'hwapp': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+
     }
 
 }
