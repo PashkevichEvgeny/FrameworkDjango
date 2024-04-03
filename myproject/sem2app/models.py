@@ -36,3 +36,27 @@ class Author(models.Model):
 
     def full_name(self):
         return f'{self.name} {self.surname}'
+
+
+class Post(models.Model):
+    """
+    ## Задание №4
+    Создайте модель Статья (публикация).
+    Авторы из прошлой задачи могут писать статьи.
+    У статьи может быть только один автор.
+    У статьи должны быть следующие обязательные поля:
+    - заголовок статьи с максимальной длиной 200 символов
+    - содержание статьи
+    - дата публикации статьи
+    - автор статьи с удалением связанных объектов при удалении автора
+    - категория статьи с максимальной длиной 100 символов
+    - количество просмотров статьи со значением по умолчанию 0
+    - флаг, указывающий, опубликована ли статья со значением по умолчанию False
+    """
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    published = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='author_posts')
+    category = models.CharField(max_length=100)
+    number_post_views = models.IntegerField(default=0)
+    status = models.BooleanField(default=False)
