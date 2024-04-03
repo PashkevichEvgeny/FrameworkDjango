@@ -28,6 +28,7 @@ class Author(models.Model):
     - день рождения
     Дополнительно создай пользовательское поле “полное имя”, которое возвращает имя и фамилию.
     """
+    objects = None
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     email = models.EmailField()
@@ -53,6 +54,7 @@ class Post(models.Model):
     - количество просмотров статьи со значением по умолчанию 0
     - флаг, указывающий, опубликована ли статья со значением по умолчанию False
     """
+    objects = None
     title = models.CharField(max_length=200)
     content = models.TextField()
     published = models.DateTimeField(auto_now_add=True)
@@ -60,3 +62,6 @@ class Post(models.Model):
     category = models.CharField(max_length=100)
     number_post_views = models.IntegerField(default=0)
     status = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.title=}, {self.author.full_name()=}'
