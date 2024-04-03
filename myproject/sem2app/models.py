@@ -65,3 +65,25 @@ class Post(models.Model):
 
     def __str__(self):
         return f'{self.title=}, {self.author.full_name()=}'
+
+
+class Comment(models.Model):
+    """
+    ## Задание №6
+    Создайте модель Комментарий.
+    Авторы могут добавлять комментарии к своим и чужим статьям.
+    Т.е. у комментария может быть один автор.
+    И комментарий относится к одной статье.
+    У модели должны быть следующие поля
+    - автор
+    - статья
+    - комментарий
+    - дата создания
+    - дата изменения
+    """
+    objects = None
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='author_comments')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments_for_post')
+    comment = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
