@@ -1,0 +1,15 @@
+{% extends 'sem3app/base.html' %}
+{% block title %} {{ title }} {% endblock %}
+{% block content %}
+    {% for result in results %}
+    <div>
+        {% if title != 'Орел-Решка' %}
+            {{ result }}
+        {% elif result|slice:"13:14" == '0' %}
+            {{ result|slice:":13" }} Решка
+        {% elif result|slice:"13:14" == '1' %}
+            {{ result|slice:":13" }} Орел
+        {% endif %}
+    </div>
+    {% endfor %}
+{% endblock %}
