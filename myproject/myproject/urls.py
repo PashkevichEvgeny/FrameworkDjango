@@ -22,4 +22,5 @@ urlpatterns = [
     path('prefix/', include('myapp.urls')),
     path('simplegames/', include('simplegamesapp.urls')),
     path('hw/', include('hwapp.urls')),
+    path('sem3app/', include('sem3app.urls')),
 ]
