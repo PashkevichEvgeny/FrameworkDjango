@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'myapp',
     # 'simplegamesapp',
     'sem2app',
+    'sem3app',
     'hw2app',
 ]
 
