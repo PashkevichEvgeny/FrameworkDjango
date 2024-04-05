@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Обо мне</title>
-        <meta charset="utf-8" />
-    </head>
-    <body>
-        <div>
-            Страница об авторе этого сайта.
-        </div>
-        <div>
-            Уже умею писать "Hello world" в {{ number }} {{ message }} фреймворках.
-        </div>
-    </body>
-</html>
+{% extends 'sem3app/base.html' %}
+{% block title %}Обо мне{% endblock %}
+{% block content %}
+    <div>
+        Страница об авторе этого сайта.
+    </div>
+    <div>
+        Уже умею писать "Hello world" в {{ number }} {{ message }} фреймворках.
+    </div>
+{% endblock %}
