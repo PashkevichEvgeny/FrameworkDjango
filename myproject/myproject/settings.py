@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'myapp',
     # 'simplegamesapp',
     'sem2app',
+    'hw2app',
 ]
 
 MIDDLEWARE = [
