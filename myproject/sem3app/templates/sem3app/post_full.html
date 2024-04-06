@@ -7,4 +7,16 @@
     </div>
     <div>{{ post.content }}</div>
     <div>Number of views: {{ post.number_post_views }}</div>
+    <div> Comments: </div>
+    {% for comment in comments %}
+         <h4>Comment from <b>{{ comment.author.surname}}</b>:</h4>
+        <div>
+            {{ comment.comment }}
+            {% if comment.created != comment.updated %}
+                <b> Comment edited {{ comment.updated|date:"d.m.Y H:i" }} </b>
+            {% else %}
+                <b> {{ comment.created|date:"d.m.Y H:i" }} </b>
+            {% endif %}
+        </div>
+    {% endfor %}
 {% endblock %}

@@ -8,7 +8,7 @@ from django.views.generic import TemplateView
 # Create your views here.
 
 # view as a function
-from sem3app.models import Author, Post
+from sem3app.models import Author, Post, Comment
 
 
 def main(request):
@@ -59,4 +59,5 @@ def post_full(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     post.number_post_views += 1
     post.save()
-    return render(request, 'sem3app/post_full.html', {'post': post, 'author': post.author})
+    comments = Comment.objects.filter(post=post_id).order_by('created')
+    return render(request, 'sem3app/post_full.html', {'post': post, 'author': post.author, 'comments': comments})
