@@ -57,4 +57,6 @@ def author_posts(request, author_id):
 
 def post_full(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    return render(request, 'sem3app/post_full.html', {'post': post})
+    post.number_post_views += 1
+    post.save()
+    return render(request, 'sem3app/post_full.html', {'post': post, 'author': post.author})
