@@ -2,4 +2,5 @@
 {% block title %} Orders {% endblock %}
 {% block content %}
     <h2><a href="{% url 'client_orders' client.id %}"> {{ client.name }}'s Orders </a></h2>
+    <h2><a href="{% url 'client_products_list' client.id interval %}"> {{ client.name }}'s products list </a></h2>
 {% endblock %}
