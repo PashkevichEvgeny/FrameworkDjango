@@ -40,11 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp',
-    # 'simplegamesapp',
-    'sem2app',
+    'hw3app',
     'sem3app',
     'hw2app',
+    'sem2app',
+    'myapp',
+    # 'simplegamesapp',
 ]
 
 MIDDLEWARE = [

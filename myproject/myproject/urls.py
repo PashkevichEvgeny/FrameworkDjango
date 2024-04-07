@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('prefix/', include('myapp.urls')),
     path('simplegames/', include('simplegamesapp.urls')),
-    path('hw/', include('hwapp.urls')),
+    path('hw3app/', include('hw3app.urls')),
     path('sem3app/', include('sem3app.urls')),
+    path('hw/', include('hwapp.urls')),
 ]
