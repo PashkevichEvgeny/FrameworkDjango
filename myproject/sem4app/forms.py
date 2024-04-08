@@ -1,8 +1,6 @@
-import datetime
-
 from django import forms
 
-from sem3app.models import Author
+from sem3app.models import Author, Post
 
 
 class UserForm(forms.Form):
@@ -21,3 +19,9 @@ class AddAuthorForm(forms.ModelForm):
         model = Author
         fields = '__all__'
 
+
+class AddPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        exclude = ['author', 'number_post_views']
+    author = forms.ChoiceField(choices=((author.pk, author.name) for author in Author.objects.all()))

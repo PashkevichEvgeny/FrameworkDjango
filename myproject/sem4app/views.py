@@ -2,9 +2,9 @@ import logging
 
 from django.shortcuts import render
 
-from sem3app.models import Author
+from sem3app.models import Author, Post
 from sem3app.views import head_tails, dice, rand100
-from .forms import UserForm, GameForm, AddAuthorForm
+from .forms import UserForm, GameForm, AddAuthorForm, AddPostForm
 
 logger = logging.getLogger(__name__)
 
@@ -53,3 +53,22 @@ def add_author(request):
     else:
         form = AddAuthorForm()
     return render(request, 'sem4app/user_form.html', {'form': form, 'message': message})
+
+
+def add_post(request):
+    message = ''
+    if request.method == 'POST':
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            post = Post(title=form.cleaned_data['title'],
+                        content=form.cleaned_data['content'],
+                        author=Author.objects.get(pk=form.cleaned_data['author']),
+                        category=form.cleaned_data['category'],)
+            post.save()
+
+            logger.info(f'Получили {form.cleaned_data=}')
+            message = f'Статья {" ".join(map(str, form.cleaned_data.values()))} сохранена'
+    else:
+        form = AddPostForm()
+    return render(request, 'sem4app/user_form.html', {'form': form, 'message': message})
+
