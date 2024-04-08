@@ -1,10 +1,10 @@
 import logging
-import random
 
 from django.shortcuts import render
 
+from sem3app.models import Author
 from sem3app.views import head_tails, dice, rand100
-from .forms import UserForm, GameForm
+from .forms import UserForm, GameForm, AddAuthorForm
 
 logger = logging.getLogger(__name__)
 
@@ -40,3 +40,16 @@ def game_form(request):
     else:
         form = GameForm()
     return render(request, 'sem4app/game_form.html', {'form': form})
+
+
+def add_author(request):
+    message = ''
+    if request.method == 'POST':
+        form = AddAuthorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            logger.info(f'Получили {form.cleaned_data=}')
+            message = f'Автор {" ".join(map(str, form.cleaned_data.values()))} сохранен'
+    else:
+        form = AddAuthorForm()
+    return render(request, 'sem4app/user_form.html', {'form': form, 'message': message})

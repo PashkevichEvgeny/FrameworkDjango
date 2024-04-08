@@ -1,4 +1,8 @@
+import datetime
+
 from django import forms
+
+from sem3app.models import Author
 
 
 class UserForm(forms.Form):
@@ -10,3 +14,10 @@ class UserForm(forms.Form):
 class GameForm(forms.Form):
     name_game = forms.ChoiceField(choices=(('H', 'Head Tails'), ('D', 'Dice'), ('R', 'Rand100')))
     throws = forms.IntegerField(min_value=1, max_value=64)
+
+
+class AddAuthorForm(forms.ModelForm):
+    class Meta:
+        model = Author
+        fields = '__all__'
+
