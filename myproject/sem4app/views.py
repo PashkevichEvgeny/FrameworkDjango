@@ -1,10 +1,10 @@
 import logging
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 
-from sem3app.models import Author, Post
+from sem3app.models import Author, Post, Comment
 from sem3app.views import head_tails, dice, rand100
-from .forms import UserForm, GameForm, AddAuthorForm, AddPostForm
+from .forms import UserForm, GameForm, AddAuthorForm, AddPostForm, AddCommentForm
 
 logger = logging.getLogger(__name__)
 
@@ -71,4 +71,30 @@ def add_post(request):
     else:
         form = AddPostForm()
     return render(request, 'sem4app/user_form.html', {'form': form, 'message': message})
+
+
+def post_full(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    post.number_post_views += 1
+    post.save()
+    comments = Comment.objects.filter(post=post_id).order_by('-created')
+
+    message = ''
+    if request.method == 'POST':
+        form = AddCommentForm(request.POST)
+        if form.is_valid():
+            comment = Comment(author=Author.objects.get(pk=form.cleaned_data['author']),
+                              post=Post.objects.get(pk=post_id),
+                              comment=form.cleaned_data['comment'],)
+            comment.save()
+
+            logger.info(f'Получили {form.cleaned_data=} {post_id=}')
+            return redirect('post_full', post_id)
+    else:
+        form = AddCommentForm()
+    return render(request, 'sem4app/post_full.html', {'post': post,
+                                                      'author': post.author,
+                                                      'comments': comments,
+                                                      'form': form,
+                                                      'message': message})
 

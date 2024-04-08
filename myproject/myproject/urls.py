@@ -20,9 +20,9 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('prefix/', include('myapp.urls')),
+    path('sem3app/', include('sem3app.urls')),
     path('sem4app/', include('sem4app.urls')),
     path('hw3app/', include('hw3app.urls')),
-    path('sem3app/', include('sem3app.urls')),
     path('hw/', include('hwapp.urls')),
     path('simplegames/', include('simplegamesapp.urls')),
 ]

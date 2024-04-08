@@ -25,3 +25,8 @@ class AddPostForm(forms.ModelForm):
         model = Post
         exclude = ['author', 'number_post_views']
     author = forms.ChoiceField(choices=((author.pk, author.name) for author in Author.objects.all()))
+
+
+class AddCommentForm(forms.Form):
+    author = forms.ChoiceField(choices=((author.pk, author.name) for author in Author.objects.all()))
+    comment = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
