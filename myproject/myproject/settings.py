@@ -177,6 +177,11 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+        'sem4app': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
 
     }
 
