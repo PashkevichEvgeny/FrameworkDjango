@@ -23,6 +23,7 @@ urlpatterns = [
     path('sem3app/', include('sem3app.urls')),
     path('sem4app/', include('sem4app.urls')),
     path('hw3app/', include('hw3app.urls')),
+    path('hw4app/', include('hw4app.urls')),
     path('hw/', include('hwapp.urls')),
     path('simplegames/', include('simplegamesapp.urls')),
 ]

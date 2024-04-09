@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'hw4app',
     'sem4app',
     'hw3app',
     'sem3app',
@@ -178,6 +179,12 @@ LOGGING = {
             'propagate': True,
         },
         'sem4app': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+
+        'hw4app': {
             'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': True,
