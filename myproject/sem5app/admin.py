@@ -3,9 +3,25 @@ from sem3app.models import Author, Post, Comment
 from hw3app.models import Client, Product, Order
 # Register your models here.
 
-admin.site.register(Author)
-admin.site.register(Post)
-admin.site.register(Comment)
-admin.site.register(Client)
-admin.site.register(Product)
-admin.site.register(Order)
+
+class AuthorAdmin(admin.ModelAdmin):
+    list_display = ['name', 'surname', 'email', 'dob']
+    ordering = ['surname']
+    list_filter = ['dob', 'surname']
+
+
+class PostAdmin(admin.ModelAdmin):
+    list_display = ['title', 'author', 'get_summary', 'category', 'number_post_views', 'status']
+    ordering = ['-published', 'status']
+    list_filter = ['author', 'category', 'status']
+
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['author', 'post', 'comment']
+    ordering = ['-created', 'updated']
+    list_filter = ['author', 'post', 'created', 'updated']
+
+
+admin.site.register(Author, AuthorAdmin)
+admin.site.register(Post, PostAdmin)
+admin.site.register(Comment, CommentAdmin)
