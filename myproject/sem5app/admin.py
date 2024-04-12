@@ -1,6 +1,6 @@
 from django.contrib import admin
 from sem3app.models import Author, Post, Comment
-from hw3app.models import Client, Product, Order
+
 # Register your models here.
 
 
