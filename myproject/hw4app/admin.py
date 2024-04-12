@@ -36,6 +36,7 @@ class ClientAdmin(admin.ModelAdmin):
 
 class ProdsOrder(admin.TabularInline):
     model = Order.products.through
+    verbose_name = 'Продукты в заказе'
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -70,10 +71,22 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['client_id', 'total_price']
+    list_display = ['client_id', 'get_products_names', 'get_total_price', 'created']
 
+    readonly_fields = ['client_id', 'created', 'get_total_price']
     inlines = (ProdsOrder,)
-    exclude = ('products',)
+    exclude = ('products', 'total_price')
+    fieldsets = [
+        ('Имя Клиента', {
+            'fields': ['client_id']
+        }),
+        ('Дата создания заказа', {
+            'fields': ['created']
+        }),
+        ('Итого', {
+            'fields': ['get_total_price']
+        })
+    ]
 
 
 admin.site.register(Client, ClientAdmin)

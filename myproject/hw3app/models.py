@@ -10,7 +10,7 @@ class Client(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.name=}, {format(self.created, "%b %d %H:%M")}'
+        return f'{self.name}'
 
 
 class Product(models.Model):
@@ -32,6 +32,16 @@ class Order(models.Model):
     total_price = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     created = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return f'{self.pk=} {self.client_id.name} {self.total_price=}'
+    @property
+    def get_total_price(self):
+        queryset = self.products.all().aggregate(total_price=models.Sum('price'))
+        return round(queryset["total_price"], 2)
 
+    @property
+    def get_products_names(self):
+        # queryset = self.products.all().values()
+        queryset = self.products.values()
+        return ', '.join(q['name'] for q in queryset)
+
+    def __str__(self):
+        return f'{self.pk=} {self.client_id.name} {self.get_total_price=}'
