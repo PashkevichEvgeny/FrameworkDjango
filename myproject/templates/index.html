@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+    {% for k, v in urls.items %}
+        {% for path in v %}
+        <div>
+            <a href="{{ k }}{{ path }}">{{ k }}{{ path }}</a>
+        </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
